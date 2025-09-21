@@ -55,11 +55,7 @@ RUN for repo in \
     https://github.com/ssitu/ComfyUI_UltimateSDUpscale.git \
     https://github.com/kijai/ComfyUI-KJNodes.git \
     https://github.com/rgthree/rgthree-comfy.git \
-    https://github.com/JPS-GER/ComfyUI_JPS-Nodes.git \
-    https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes.git \
-    https://github.com/Jordach/comfy-plasma.git \
     https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite.git \
-    https://github.com/bash-j/mikey_nodes.git \
     https://github.com/ltdrdata/ComfyUI-Impact-Pack.git \
     https://github.com/Fannovel16/comfyui_controlnet_aux.git \
     https://github.com/yolain/ComfyUI-Easy-Use.git \
@@ -98,6 +94,5 @@ RUN for repo in \
 
 COPY src/start_script.sh /start_script.sh
 RUN chmod +x /start_script.sh
-COPY 4xLSDIR.pth /4xLSDIR.pth
 
 CMD ["/start_script.sh"]
