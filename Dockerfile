@@ -28,7 +28,14 @@ ENV PATH="/opt/venv/bin:$PATH"
 
 RUN --mount=type=cache,target=/root/.cache/pip \
     pip install --pre torch torchvision torchaudio \
-        --index-url https://download.pytorch.org/whl/nightly/cu129
+        --index-url https://download.pytorch.org/whl/nightly/cu128
+
+# Build FA3 (beta) from source
+ENV CUDA_HOME=/usr/local/cuda
+RUN git clone --depth 1 https://github.com/Dao-AILab/flash-attention.git /opt/flash-attention && \
+    cd /opt/flash-attention/hopper && \
+    pip install packaging ninja && \
+    python setup.py install
 
 # Core Python tooling
 RUN --mount=type=cache,target=/root/.cache/pip \
