@@ -30,11 +30,14 @@ RUN --mount=type=cache,target=/root/.cache/pip \
     pip install --pre torch torchvision torchaudio \
         --index-url https://download.pytorch.org/whl/nightly/cu128
 
-# Build FA3 (beta) from source
 ENV CUDA_HOME=/usr/local/cuda
+# Cap parallelism hard to avoid OOMs
+ENV MAX_JOBS=1 CMAKE_BUILD_PARALLEL_LEVEL=1
+
+RUN apt-get update && apt-get install -y --no-install-recommends git ninja-build && rm -rf /var/lib/apt/lists/*
 RUN git clone --depth 1 https://github.com/Dao-AILab/flash-attention.git /opt/flash-attention && \
     cd /opt/flash-attention/hopper && \
-    pip install packaging ninja && \
+    pip install --no-cache-dir packaging ninja && \
     python setup.py install
 
 # Core Python tooling
